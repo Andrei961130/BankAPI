@@ -36,7 +36,7 @@ namespace Core.MapperConfig
             return new TradeOrderDTOResponse()
             {
                 Amount = tradeOrder.Amount,
-                TradeOrderType = tradeOrder.TradeOrderType.Name
+                TradeOrderType = tradeOrder.TradeOrderType?.Name
             };
         }
 

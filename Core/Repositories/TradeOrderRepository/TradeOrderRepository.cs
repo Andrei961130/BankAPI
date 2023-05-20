@@ -1,6 +1,7 @@
 ﻿
 using Core.Database;
 using Core.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core.Repositories
 {
@@ -12,7 +13,8 @@ namespace Core.Repositories
 
         public IQueryable<TradeOrder> GetAll()
         {
-            return base.GetAll();
+            return base.GetAll()
+                .Include(to => to.TradeOrderType);
         }
     }
 }
