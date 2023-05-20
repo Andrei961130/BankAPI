@@ -1,6 +1,7 @@
 ﻿
+using Azure.Core;
 using Core.DTOs;
-using Core.MapperConfig;
+using Core.ExtensionMethods;
 using Core.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,11 +16,18 @@ namespace Core.Services
             TradeOrderRepository = tradeOrderRepository;
         }
 
-        public async Task<List<TradeOrderDTOResponse>> GetAll()
+        public async Task<(List<TradeOrderDTOResponse> tradeOrders, int totalResults)> GetAll(PaginationRequest paginationRequest)
         {
-            var operationTypes = TradeOrderRepository.GetAll();
+            var query = TradeOrderRepository.GetAll();
 
-            return await operationTypes.Select(to => to.ToDTO()).ToListAsync();
+            var totalResults = await query.CountAsync();
+
+            var tradeOrders = await query
+                .Skip((paginationRequest.PageNumber - 1) * paginationRequest.PageSize).Take(paginationRequest.PageSize)
+                .Select(to => to.ToDTO())
+                .ToListAsync();
+
+            return (tradeOrders, totalResults);
         }
     }
 }

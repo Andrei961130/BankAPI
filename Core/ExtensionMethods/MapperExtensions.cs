@@ -1,9 +1,9 @@
 ﻿using Core.DTOs;
 using Core.Entities;
 
-namespace Core.MapperConfig
+namespace Core.ExtensionMethods
 {
-    public static class MapperMethods
+    public static class MapperExtensions
     {
         public static DepositDTOResponse ToDTO(this Deposit deposit)
         {

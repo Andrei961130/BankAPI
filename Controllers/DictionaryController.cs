@@ -1,5 +1,4 @@
 ﻿using Core.DTOs;
-using Core.Services;
 using Infrastructure.Helpers;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,7 +14,7 @@ namespace BankAPI.Controllers
         }
 
         [HttpGet("headers")]
-        public async Task<IActionResult> GetHeaders([FromQuery] string className)
+        public async Task<IActionResult> GetHeaders([FromQuery] string className)   
         {
             List<string> headerList = null;
 

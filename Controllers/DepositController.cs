@@ -1,4 +1,6 @@
-﻿using Core.Services;
+﻿using Core.DTOs;
+using Core.Services;
+using Core.ExtensionMethods;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BankAPI.Controllers
@@ -15,16 +17,18 @@ namespace BankAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] PaginationRequest paginationRequest)
         {
-            var result = await DepositService.GetAll();
+            var result = await DepositService.GetAll(paginationRequest);
 
-            if (result?.Any() != true) 
+            HttpContext.AddPaginationHeaders(paginationRequest, result.totalResults);
+
+            if (result.deposits?.Any() != true) 
             {
                 return NoContent();
             }
 
-            return Ok(result);
+            return Ok(result.deposits);
         }
     }
 }

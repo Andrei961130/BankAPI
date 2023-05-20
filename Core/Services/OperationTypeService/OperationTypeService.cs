@@ -1,6 +1,6 @@
 ﻿
 using Core.DTOs;
-using Core.MapperConfig;
+using Core.ExtensionMethods;
 using Core.Repositories;
 using Microsoft.EntityFrameworkCore;
 

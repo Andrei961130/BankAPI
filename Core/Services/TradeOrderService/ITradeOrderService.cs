@@ -5,6 +5,7 @@ namespace Core.Services
 {
     public interface ITradeOrderService
     {
-        public Task<List<TradeOrderDTOResponse>> GetAll();
+        public Task<(List<TradeOrderDTOResponse> tradeOrders, int totalResults)> GetAll(PaginationRequest paginationRequest);
     }
 }
+ 

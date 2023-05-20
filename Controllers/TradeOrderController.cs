@@ -1,4 +1,6 @@
-﻿using Core.Services;
+﻿using Core.DTOs;
+using Core.ExtensionMethods;
+using Core.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BankAPI.Controllers
@@ -15,16 +17,18 @@ namespace BankAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] PaginationRequest paginationRequest)
         {
-            var result = await TradeOrderService.GetAll();
+            var result = await TradeOrderService.GetAll(paginationRequest);
 
-            if (result?.Any() != true)
+            HttpContext.AddPaginationHeaders(paginationRequest, result.totalResults);
+
+            if (result.tradeOrders?.Any() != true)
             {
                 return NoContent();
             }
 
-            return Ok(result);
+            return Ok(result.tradeOrders);
         }
     }
 }
