@@ -10,5 +10,7 @@ namespace Core.Entities
         public string ToAddress { get; set; }
         public bool WasApprovedByUser2FA { get; set; }
         public int OperationId { get; set; }
+
+        public virtual Operation Operation { get; set; }
     }
 }
