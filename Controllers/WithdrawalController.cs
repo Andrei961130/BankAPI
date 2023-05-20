@@ -5,21 +5,21 @@ namespace BankAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class DepositController : ControllerBase
+    public class WithdrawalController : ControllerBase
     {
-        private IDepositService DepositService { get; }
+        private IWithdrawalService WithdrawalService { get; }
 
-        public DepositController(IDepositService depositService)
+        public WithdrawalController(IWithdrawalService withdrawalService)
         {
-            DepositService = depositService;
+            WithdrawalService = withdrawalService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var result = await DepositService.GetAll();
+            var result = await WithdrawalService.GetAll();
 
-            if (result?.Any() != true) 
+            if (result?.Any() != true)
             {
                 return NoContent();
             }
