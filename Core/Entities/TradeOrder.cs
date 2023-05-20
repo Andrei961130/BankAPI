@@ -10,5 +10,8 @@ namespace Core.Entities
         public int OperationId { get; set; }
         public int TradeOrderTypeId { get; set; }
 
+        public virtual Operation Operation { get; set; }
+        public virtual TradeOrderType TradeOrderType { get; set; }
+
     }
 }
