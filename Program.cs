@@ -1,10 +1,12 @@
+using BankAPI;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCors();
-
 builder.Services.AddControllers();
 
-builder.Services.AddDbContext(builder.Configuration);
+builder.Services.AddAppSettings(builder.Configuration);
+builder.Services.AddDatabaseContext(builder.Configuration);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
